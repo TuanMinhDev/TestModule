@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .keyword {
+        width: 300px;
+        height: 30px;
+        margin-right: 10px;
+      }
+      .button {
+        height: 35px;
+      }
+      .list {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .firstlast {
+        margin-top: 20px;
+      }
+      .post {
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" id="keyword" class="keyword" placeholder="Email" />
+      <button id="button" class="button">Search</button>
+    </div>
+    <div id="list" class="list"></div>
+
+    <script src="users.js"></script>
+    <script src="posts.js"></script>
+    <script>
+      const $keyword = document.getElementById("keyword");
+      const $button = document.getElementById("button");
+      const $list = document.getElementById("list");
+
+      function render(users, posts) {
+        const value = $keyword.value;
+        let string = "";
+        for (let i = 0; i < users.length; i++) {
+          if (users[i].email == value) {
+            string += `
+                <div class="firstlast">
+                    <h2>${users[i].first_name} ${users[i].last_name}</h2>
+                    <div class="posts" id="posts-${users[i].id}"></div>
+                </div>
+                `;
+          }
+        }
+        $list.innerHTML = string;
+
+        for (let i = 0; i < users.length; i++) {
+          if (users[i].email == value) {
+            let userPosts = posts.filter((post) => post.user_id == users[i].id);
+            let postsHtml = "";
+            for (let j = 0; j < userPosts.length; j++) {
+              postsHtml += `
+                    <div class="post">
+                        <p>ID: ${userPosts[j].id}</p>
+                        <p>Title: ${userPosts[j].title}</p>
+                        <p>Content: ${userPosts[j].content}</p>
+                        <p>Created At: ${userPosts[j].created_at}</p>
+                        <p>Updated_at: ${userPosts[j].updated_at}</p>
+                        
+                    </div>
+                    `;
+            }
+            document.getElementById(`posts-${users[i].id}`).innerHTML = postsHtml;
+          }
+        }
+      }
+
+      $button.onclick = function () {
+        render(users, posts);
+      };
+    </script>
+  </body>
+</html>

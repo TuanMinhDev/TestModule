@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Chủ</title>
+    <style>
+      .hello {
+        display: flex;
+        background-color: aqua;
+        padding: 10px;
+      }
+      .noidung {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .box {
+        background-color: burlywood;
+        width: 500px;
+        border-radius: 20px;
+        padding: 10px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="hello" class="hello"></div>
+    <div class="noidung">
+      <div class="box" onclick="danhSachUsers()">
+        <h3>Chức năng xem danh sách users</h3>
+        <p>
+          Nhập vào keyword. Hãy in ra những users có họ và tên hoặc email chứa
+          keyword. Mỗi users hiển thị id, họ và tên, email. +Nếu keyword trống →
+          In ra toàn bộ users
+        </p>
+      </div>
+
+      <div class="box" onclick="danhSachPosts()">
+        <h3>chức năng xem danh sách posts</h3>
+        <p>
+          Hiển thị danh sách các posts, mỗi post bao gồm ID, title, ngày tạo, họ
+          và tên người tạo.
+        </p>
+      </div>
+
+      <div class="box" onclick="chiTietPosts()">
+        <h3>Xây dựng chức năng xem chi tiết 1 post.</h3>
+        <p>
+          Nhập vào ID của post. Hãy hiển thị thông tin của 1 post có ID tương
+          ứng: ID, tiêu đề, nội dung, link ảnh, tên người tạo, ngày tạo, ngày
+          sửa đổi.
+        </p>
+      </div>
+
+      <div class="box" onclick="searchPost()">
+        <h3>chức năng tìm kiếm post theo user.</h3>
+        <p>
+          Nhập vào email của 1 user. Hãy tìm kiếm các posts của user đó và hiển
+          thị dưới dạng danh sách.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+      if (currentUser) {
+        let greeting = `
+                <h3>Xin chào, </h3>
+                <h3>${currentUser.first_name + " " + currentUser.last_name}</h3>
+            `;
+        document.getElementById("hello").innerHTML = greeting;
+      }
+      function danhSachUsers() {
+        window.location.href = "danhSachUsers.html";
+      }
+      function danhSachPosts(){
+        window.location.href = "danhSachPosts.html";
+      }
+      function chiTietPosts(){
+        window.location.href = "chiTietPosts.html";
+      }
+      function searchPost(){
+        window.location.href = "searchPost.html";
+
+      }
+    </script>
+  </body>
+</html>

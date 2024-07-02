@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .boxSearch {
+        display: flex;
+        justify-content: center;
+      }
+      .input {
+        width: 300px;
+        height: 30px;
+      }
+      .list{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .user{
+        margin-top: 10px;
+        background-color: bisque;
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="boxSearch">
+      <input type="text" class="input" id="keyword" value="" />
+    </div>
+    <div id="list" class="list"></div>
+
+    <script src="users.js"></script>
+    <script>
+      const $keyword = document.getElementById("keyword");
+
+      function render(users) {
+        let string = "";
+        for (let i = 0; i < users.length; i++) {
+          string += `
+                <div class="user">
+                    <p>${users[i].first_name}</p>
+                    <p>${users[i].last_name}</p>
+                    <p>${users[i].email}</p>
+                </div>
+                `;
+        }
+        document.getElementById("list").innerHTML = string;
+      }
+
+      render(users);
+
+      $keyword.oninput = function () {
+        const newArr = [];
+        for (let us of users) {
+          if (
+            us.email.toLowerCase().includes($keyword.value.toLowerCase()) ||
+            us.first_name.toLowerCase().includes($keyword.value.toLowerCase()) ||
+            us.last_name.toLowerCase().includes($keyword.value.toLowerCase())
+          ) {
+            newArr.push(us);
+          }
+        }
+        render(newArr);
+      };
+    </script>
+  </body>
+</html>

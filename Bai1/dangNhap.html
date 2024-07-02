@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng Nhập</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Đăng Nhập</h1>
+      <div class="information">
+        <div class="box">
+          <label class="menu">Email</label>
+          <input
+            type="text"
+            id="loginEmail"
+            class="input"
+            placeholder="VD: a@gmail.com"
+            value=""
+          />
+        </div>
+        <div class="box">
+          <label class="menu">Password</label>
+          <input
+            type="password"
+            id="loginPassword"
+            class="input"
+            placeholder="VD:123456"
+            value=""
+          />
+        </div>
+        <div class="dangNhap">
+          <button class="button" id="dangNhap">Đăng nhập</button>
+        </div>
+        <div class="dangKy">
+          <a href="dangKy.html">Đăng ký</a>
+        </div>
+      </div>
+      <div id="list"></div>
+    </div>
+
+    <script src="users.js"></script>
+    <script>
+      const $loginEmail = document.getElementById("loginEmail");
+      const $loginPassword = document.getElementById("loginPassword");
+      const $dangNhap = document.getElementById("dangNhap");
+
+      $dangNhap.onclick = function () {
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let email = $loginEmail.value;
+        let password = $loginPassword.value;
+
+        if (email === "" || password === "") {
+          alert("Hãy nhập đầy đủ thông tin");
+        } else {
+          let user = users.find(
+            (u) => u.email === email && u.password === password
+          );
+          if (user) {
+            localStorage.setItem("currentUser", JSON.stringify(user));
+          } else {
+            alert("Thông tin tài khoản không chính xác");
+          }
+        }
+        window.location.href = "trangChu.html";
+      };
+    </script>
+  </body>
+</html>

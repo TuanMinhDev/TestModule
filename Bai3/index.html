@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="todo">
+            <h1>#Todo</h1>
+        </div>
+        <div class="threeButton">
+            <button class="boxButton all" id="all">All</button>
+            <button class="boxButton active" id="active">Active</button>
+            <button class="boxButton completed" id="completed">Completed</button>
+        </div>
+        <hr class="hr">
+
+
+        <div id="allAdd" class="allAdd">
+            <div>
+                <input type="text" class="input" placeholder="add details" id="add" value="">
+                <button class="searchButton" id="button">Add</button>
+            </div>
+            <div id="list"></div>
+        </div>
+
+
+        <div id="activeAll" class="activeAll">
+            <div>
+                <input type="text" class="input" placeholder="add details" id="add" value="">
+                <button class="searchButton" id="button">Add</button>
+            </div>
+            <div id="listActive"></div>
+
+        </div>
+
+        
+        <div id="completedDele" class="completedDele">
+            <div id="listDele"></div>
+            <div class="boxDeleteAll">
+                <button id="deleteAll" class="deleteAll">Delete all</button>
+            </div>
+        </div>
+    </div>
+ 
+    <script src="script.js"></script>
+</body>
+</html>

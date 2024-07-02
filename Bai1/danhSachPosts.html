@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .firstlast {
+            background-color: aqua;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        .posts {
+            margin-left: 20px;
+        }
+        .post{
+            background-color: antiquewhite;
+            padding: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="name"></div>
+
+    <script src="users.js"></script>
+    <script src="posts.js"></script>
+    <script>
+        function render(users, posts) {
+            let string = "";
+            for (let i = 0; i < users.length; i++) {
+                string += `
+                <div class="firstlast">
+                    <h2>${users[i].first_name} ${users[i].last_name}</h2>
+                    <div class="posts" id="posts-${users[i].id}"></div>
+                </div>
+                `;
+            }
+            document.getElementById("name").innerHTML = string;
+
+            for (let i = 0; i < users.length; i++) {
+                let userPosts = posts.filter(post => post.user_id == users[i].id);
+                let postsHtml = "";
+                for (let j = 0; j < userPosts.length; j++) {
+                    postsHtml += `
+                    <div class="post">
+                        <p>${userPosts[j].id}</p>
+                        <p>${userPosts[j].title}</p>
+                        <p>${userPosts[j].created_at}</p>
+                    </div>
+                    `;
+                }
+                document.getElementById(`posts-${users[i].id}`).innerHTML = postsHtml;
+            }
+        }
+        render(users, posts);
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng Ký</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Đăng Ký</h1>
+      <div class="information">
+        <div class="box">
+          <label class="menu">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            class="input"
+            placeholder="VD: abc"
+            value=""
+          />
+        </div>
+        <div class="box">
+          <label class="menu">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            class="input"
+            placeholder="VD: abc"
+            value=""
+          />
+        </div>
+        <div class="box">
+          <label class="menu">Email</label>
+          <input
+            type="text"
+            id="email"
+            class="input"
+            placeholder="VD: a@gmail.com"
+            value=""
+          />
+        </div>
+        <div class="box">
+          <label class="menu">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="input"
+            placeholder="VD:123456"
+            value=""
+          />
+        </div>
+        <div class="dangNhap">
+          <button class="button" id="dangKy">Đăng ký</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="users.js"></script>
+    <script>
+      const $firstName = document.getElementById("firstName");
+      const $lastName = document.getElementById("lastName");
+      const $email = document.getElementById("email");
+      const $password = document.getElementById("password");
+      const $dangKy = document.getElementById("dangKy");
+
+      $dangKy.onclick = function () {
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let bool = false;
+        for (let i = 0; i < users.length; i++) {
+          if (users[i].email === $email.value) {
+            bool = true;
+            break;
+          }
+        }
+
+        if (
+          $firstName.value == "" ||
+          $lastName.value == "" ||
+          $email.value == "" ||
+          $password.value == ""
+        ) {
+          alert("Nhập đầy đủ thông tin");
+        } else {
+          if (bool == true) {
+            alert("Email đã tồn tại");
+          } else {
+            let newUser = {
+              id: users.length + 1,
+              first_name: $firstName.value,
+              last_name: $lastName.value,
+              email: $email.value,
+              password: $password.value,
+            };
+            users.push(newUser);
+            localStorage.setItem("users", JSON.stringify(users));
+            window.location.href = "dangNhap.html";
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

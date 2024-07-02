@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .keyword {
+            width: 300px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .button {
+            height: 35px;
+        }
+        .post-container {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            max-width: 500px;
+        }
+        .list{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="keyword" class="keyword" placeholder="Enter post ID">
+        <button id="button" class="button">Search</button>
+    </div>
+    <div id="list" class="list"></div>
+    
+    <script src="users.js"></script>
+    <script src="posts.js"></script>
+    <script>
+        const $keyword = document.getElementById('keyword');
+        const $button = document.getElementById('button');
+
+        function render(users, posts) {
+            const value = Number($keyword.value);
+            let string = "";
+
+            for (let i = 0; i < posts.length; i++) {
+                if (posts[i].id === value) {
+                    string += `
+                    <div class="post-container">
+                        <p><strong>ID:</strong> ${posts[i].id}</p>
+                        <p><strong>Title:</strong> ${posts[i].title}</p>
+                        <p><strong>Content:</strong> ${posts[i].content}</p>
+                        <p><strong>Image:</strong> ${posts[i].image}</p>
+                        <p><strong>Created At:</strong> ${posts[i].created_at}</p>
+                        <p><strong>Updated At:</strong> ${posts[i].updated_at}</p>
+                        <div id="ID-${posts[i].id}"></div>
+                    </div>
+                    `;
+                }
+            }
+            document.getElementById("list").innerHTML = string;
+
+            for (let i = 0; i < posts.length; i++) {
+                if (posts[i].id === value) {
+                    const postUser = users.filter(user => user.id === posts[i].user_id);
+                    let userHTML = "";
+                    for (let j = 0; j < postUser.length; j++) {
+                        userHTML += `<p><strong>User:</strong> ${postUser[j].first_name} ${postUser[j].last_name}</p>`;
+                    }
+                    document.getElementById(`ID-${posts[i].id}`).innerHTML = userHTML;
+                }
+            }
+        }
+
+        $button.onclick = function() {
+            render(users, posts);
+        }
+    </script>
+</body>
+</html>

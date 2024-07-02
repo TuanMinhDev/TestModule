@@ -1,0 +1,35 @@
+.container{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.information{
+    background-color:  #FED9B7;
+    margin-top: 20px;
+    padding: 20px;
+    width: 30%;
+    height: 300px;
+    border-radius: 20px;
+
+}
+.box{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.input{
+    margin-top: 10px;
+}
+.dangNhap{
+    text-align: center;
+
+}
+.button{
+    border-radius: 20px;
+}
+.dangKy{
+    margin-top: 5px;
+    text-align: center;
+}
